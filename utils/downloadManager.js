@@ -51,6 +51,20 @@ module.exports = {
         });
     },
 
+    /**
+     * 
+     * @param {string} originalFileName 
+     * @return {string}
+     */
+    generateTargetPath: function(originalFileName){
+        let slashIdx = originalFileName.lastIndexOf('/');
+        if(slashIdx == -1){
+            return originalFileName;
+        }
+
+        return "Maps/Downloaded/" + originalFileName.substr(slashIdx + 1);
+    },
+
     downloadFile: function (fileDetails) {
 
         if(process.cwd() !== outputFolder) {
@@ -58,7 +72,8 @@ module.exports = {
             process.chdir(outputFolder);
         }
 
-        let contentPath = fileDetails.filename.toLocaleLowerCase();
+        let contentPath = this.generateTargetPath(fileDetails.filename);
+
         let fileStream = this.createDir(contentPath);
         let self = this;
 
@@ -89,12 +104,15 @@ module.exports = {
                 log.debug("Document parsed");
                 let xmlDoc = dom.window.document;
                 let newChildNode = xmlDoc.createElement("map");
-                let newTextNode = xmlDoc.createTextNode(contentPath.split("downloaded")[1]);
-                newChildNode.appendChild(newTextNode);
+                let newFileNode = xmlDoc.createElement("file");
+                newChildNode.appendChild(newFileNode);
+                let newTextNode = xmlDoc.createTextNode(contentPath.split("Maps/")[1]);
+                newFileNode.appendChild(newTextNode);
                 xmlDoc.documentElement.appendChild(newChildNode);
+                xmlDoc.documentElement.appendChild(xmlDoc.createTextNode("\n"));
 
-                // Note: XML header is removed
-                return fs.writeFile(outputXmlPath, xmlDoc.documentElement.outerHTML, err => {
+                // Note: XML header is removed, adding it manually
+                return fs.writeFile(outputXmlPath, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xmlDoc.documentElement.outerHTML, err => {
                     if (err)
                         return err;
                     log.info("XML successfully updated");
