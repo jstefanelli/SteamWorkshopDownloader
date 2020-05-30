@@ -6,7 +6,7 @@ angular.module("swdownloader.adminView", ["ngRoute"])
 	.config(["$routeProvider", function($routeProvider) {
 
 		$routeProvider.when("/swdownloader/admin", {
-			templateUrl: "/views/adminView/adminView.html"
+			templateUrl: "views/adminView/adminView.html"
 		});
 	}])
 	.controller("adminViewCtrl", function($scope, $http, userService) {

@@ -4,7 +4,7 @@ angular.module("swdownloader.homeView", ["ngRoute"])
 	.config(["$routeProvider", function($routeProvider) {
 
 		$routeProvider.when("/swdownloader", {
-			templateUrl: "/views/homeView/homeView.html",
+			templateUrl: "views/homeView/homeView.html",
 			controller: "homeViewCtrl"
 		});
 	}])

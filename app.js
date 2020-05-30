@@ -43,6 +43,7 @@ app.use("/swdownloader/signupaction", function (req, res) {
 
 app.use("/swdownloader/loginaction", logIn);
 
+
 function logIn(req, res) {
 
     DBManager.selectSingleUser(connection, req.body)

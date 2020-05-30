@@ -4,7 +4,7 @@ angular.module("swdownloader.downloadView", ["ngRoute"])
 	.config(["$routeProvider", function($routeProvider) {
 
 		$routeProvider.when("/swdownloader/download", {
-			templateUrl: "/views/downloadView/downloadView.html",
+			templateUrl: "views/downloadView/downloadView.html",
 			controller: "downloadViewCtrl"
 		});
 	}])

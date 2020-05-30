@@ -4,7 +4,7 @@ angular.module("swdownloader.logInView", ["ngRoute"])
 	.config(["$routeProvider", function($routeProvider) {
 
 		$routeProvider.when("/swdownloader/login", {
-			templateUrl: "/views/logInView/logInView.html",
+			templateUrl: "views/logInView/logInView.html",
 			controller: "logInViewCtrl"
 		});
 	}])
